@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Container from "./_components/container";
 import Navbar from "./_components/navbar";
 import Sidebar from "./_components/sidebar";

@@ -20,10 +20,10 @@ export default function Container({ children }: { children: React.ReactNode }) {
     } else {
       dispatch(expand());
     }
-  }, [ismobile]);
+  }, [ismobile, dispatch]);
 
   return (
-    <div className={cn("flex-1", collapsed ? "ml-20" : " ml-60")}>
+    <div className={cn("flex-1", collapsed ? "ml-32" : " ml-60")}>
       {children}
     </div>
   );

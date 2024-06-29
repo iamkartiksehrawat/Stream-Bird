@@ -15,8 +15,8 @@ export const Wrapper = ({ children }: WrapperProps) => {
   return (
     <aside
       className={cn(
-        "fixed left-0 flex flex-col items-center  h-full bg-background border-r-[1px] z-5 ",
-        collapsed ? "w-20 p-3" : "w-60 p-4"
+        "fixed left-0 flex flex-col items-center h-full bg-background border-r-[1px] z-5 ",
+        collapsed ? "w-32 p-3" : "w-60 p-4"
       )}
     >
       {children}
