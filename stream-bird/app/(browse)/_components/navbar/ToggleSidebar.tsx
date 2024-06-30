@@ -19,10 +19,8 @@ const ToggleSidebar = () => {
 
   const handletoggle = () => {
     if (collapsed) {
-      console.log("expand call hua");
       dispatch(expand());
     } else {
-      console.log("collapse call hua");
       dispatch(collapse());
     }
   };
