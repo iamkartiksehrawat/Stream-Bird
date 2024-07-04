@@ -1,19 +1,18 @@
 "use server";
 
-import {
-  IngressClient,
-  RoomServiceClient,
-  IngressInput,
-  CreateIngressOptions,
-  IngressVideoOptions,
-  TrackSource,
-  IngressAudioOptions,
-  IngressAudioEncodingPreset,
-  IngressVideoEncodingPreset,
-} from "livekit-server-sdk";
-
 import { getSelf } from "@/dbconfig/auth-service";
 import StreamModel from "@/model/stream";
+import {
+  IngressAudioEncodingPreset,
+  IngressInput,
+  IngressClient,
+  IngressVideoEncodingPreset,
+  IngressVideoOptions,
+  IngressAudioOptions,
+  RoomServiceClient,
+  TrackSource,
+  type CreateIngressOptions,
+} from "livekit-server-sdk";
 import { revalidatePath } from "next/cache";
 
 const roomService = new RoomServiceClient(
@@ -23,14 +22,6 @@ const roomService = new RoomServiceClient(
 );
 
 const ingressClient = new IngressClient(process.env.LIVEKIT_API_URL!);
-
-export const deleteIngresses = async (hostIdentity: string) => {
-  const res = await ingressClient.deleteIngress(hostIdentity);
-  console.log(res);
-  return {
-    status: "success",
-  };
-};
 
 export const resetIngresses = async (hostIdentity: string) => {
   const ingresses = await ingressClient.listIngress({
@@ -53,7 +44,7 @@ export const resetIngresses = async (hostIdentity: string) => {
 export const createIngress = async (ingressType: IngressInput) => {
   const self = await getSelf();
 
-  await resetIngresses(self._id);
+  // await resetIngresses(self._id);
 
   const options: CreateIngressOptions = {
     name: self.username,
