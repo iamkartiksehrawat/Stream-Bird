@@ -1,12 +1,14 @@
-import mongoose, { Document, Model, Types, Schema } from "mongoose";
+import mongoose, { Types, Schema } from "mongoose";
 
 export type User = {
+  _id: string;
   username: string;
   imageUrl?: string;
   exUserid: string;
   bio?: string;
   followers: Types.ObjectId[];
   following: Types.ObjectId[];
+  stream: Types.ObjectId;
 };
 
 const userSchema = new Schema(
@@ -17,6 +19,7 @@ const userSchema = new Schema(
     bio: { type: String },
     followers: [{ type: Schema.Types.ObjectId, ref: "User" }],
     following: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    stream: { type: Schema.Types.ObjectId, ref: "Stream" },
   },
   {
     timestamps: true,

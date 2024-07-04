@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import "../model/UserModel";
+import "../model/stream";
 
 type connectiontype = {
   isConnected: number;

@@ -19,7 +19,7 @@ const Recommmended = ({ data }: RecommmendedProps) => {
             key={indx}
             username={user.username}
             imageUrl={user.imageUrl!}
-            isLive={false}
+            isLive={user.isLive}
           />
         ))}
       </ul>

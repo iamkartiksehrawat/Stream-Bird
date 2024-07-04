@@ -3,6 +3,7 @@ import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { connect } from "../../../../dbconfig/dbconfig";
 import User from "../../../../model/UserModel";
+import StreamModel from "@/model/stream";
 
 connect();
 
@@ -50,11 +51,19 @@ export async function POST(req: Request) {
 
   if (eventType == "user.created") {
     try {
-      await User.create({
+      const usr = await User.create({
         username: payload.data.username,
         exUserid: payload.data.id,
         imageUrl: payload.data.image_url,
       });
+
+      const stream = new StreamModel({
+        name: `${usr.username}'s Stream`,
+        userId: usr._id,
+      });
+      await stream.save();
+      usr.streams.push(stream._id);
+      await usr.save();
       console.log("User stored in MongoDB Database Successfully");
     } catch (e) {
       console.log("Error occured while storing user in MongoDB Database", e);

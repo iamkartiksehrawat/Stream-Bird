@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import usesidebarReducer from "./slices/usesidebar";
+import usechat from "./slices/usechat";
 
 const streamstore = configureStore({
   reducer: {
     usesidebar: usesidebarReducer,
+    usechat: usechat,
   },
 });
 

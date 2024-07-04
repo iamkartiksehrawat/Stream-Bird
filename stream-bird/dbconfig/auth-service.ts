@@ -26,3 +26,32 @@ export const getSelf = async () => {
     throw new Error("Internal error");
   }
 };
+
+export const getSelfByUsername = async (username: string) => {
+  try {
+    await connect();
+
+    const self = await currentUser();
+
+    if (!self || !self.username) {
+      throw new Error("Unauthorized");
+    }
+
+    const user = await User.findOne({
+      username: username,
+    });
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    if (self.username !== user.username) {
+      throw new Error("Unauthorized");
+    }
+
+    return user;
+  } catch (e) {
+    console.log(e);
+    throw new Error("Internal Error");
+  }
+};
