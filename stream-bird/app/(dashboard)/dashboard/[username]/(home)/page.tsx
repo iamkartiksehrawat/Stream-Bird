@@ -13,8 +13,7 @@ const CreatorPage = async ({ params }: CreatorPageProps) => {
   const user = await getUserByUsername(params.username);
 
   if (!user || user.exUserid !== externalUser?.id) {
-    //error show karna h yaha pe kartik
-    return <div className="pt-4">Uauthorized</div>;
+    throw new Error("Unauthorized");
   }
 
   return (

@@ -3,12 +3,7 @@ import { usePathname } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import NavItem from "./navitem";
 
-import {
-  IconCast,
-  IconKey,
-  IconMessages,
-  IconUsers,
-} from "@tabler/icons-react";
+import { IconCast, IconKey, IconMessages } from "@tabler/icons-react";
 
 const Navigation = () => {
   const { user } = useUser();
@@ -29,11 +24,6 @@ const Navigation = () => {
       label: "Chat",
       href: `/dashboard/${user?.username}/chat`,
       icon: <IconMessages />,
-    },
-    {
-      label: "Community",
-      href: `/dashboard/${user?.username}/community`,
-      icon: <IconUsers />,
     },
   ];
   return (

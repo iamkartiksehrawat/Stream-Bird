@@ -1,7 +1,8 @@
-import { isFollowingUser } from "@/dbconfig/follow-service";
-import { getUserByUsername } from "@/dbconfig/user-service";
 import { notFound } from "next/navigation";
-import { Actions } from "./_component/actions";
+
+import { getUserByUsername } from "@/dbconfig/user-service";
+import { isFollowingUser } from "@/dbconfig/follow-service";
+import StreamPlayer from "@/components/stream-player";
 
 interface UserPageProps {
   params: {
@@ -12,19 +13,14 @@ interface UserPageProps {
 const UserPage = async ({ params }: UserPageProps) => {
   const user = await getUserByUsername(params.username);
 
-  if (!user) {
+  if (!user || !user.stream) {
     notFound();
   }
 
-  const isFollowing = await isFollowingUser(user._id);
+  const isFollowing = await isFollowingUser(user.id);
 
   return (
-    <div className="pt-4">
-      <p> User : {user.username}</p>
-      <p> User : {user._id}</p>
-      <p> User : {`${isFollowing}`}</p>
-      <Actions isFollowing={isFollowing} userId={user._id} />
-    </div>
+    <StreamPlayer user={user} stream={user.stream} isFollowing={isFollowing} />
   );
 };
 
