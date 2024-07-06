@@ -15,7 +15,7 @@ export const getRecommended = async () => {
   }
 
   try {
-    const users = await User.find().sort({ createdAt: -1 });
+    const users = await User.find().sort({ createdAt: -1 }).populate("stream");
     const data = JSON.parse(JSON.stringify(users));
 
     const recommended = data.filter(

@@ -31,7 +31,7 @@ export const ResultCard = ({ data }: ResultCardProps) => {
         </div>
         <div className="space-y-1">
           <div className="flex items-center gap-x-2">
-            <p className="font-bold text-lg cursor-pointer hover:text-blue-500">
+            <p className="font-bold text-lg cursor-pointer hover:text-[#8f47f5]">
               {data.userId.username}
             </p>
             <VerifiedMark />

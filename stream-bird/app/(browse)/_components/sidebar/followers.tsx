@@ -25,7 +25,7 @@ const Followers = ({ data }: any) => {
             key={indx}
             username={item.username}
             imageUrl={item.imageUrl}
-            isLive={item.isLive}
+            isLive={item.stream.isLive}
           />
         ))}
       </ul>

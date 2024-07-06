@@ -2,13 +2,34 @@ import { getSelf } from "./auth-service";
 import User from "../model/UserModel";
 import { Types } from "mongoose";
 import { connect } from "./dbconfig";
+import { currentUser } from "@clerk/nextjs/server";
 
 export const getFollowedUsers = async () => {
   try {
     await connect();
-    const self = await getSelf();
+    const self = await currentUser();
+    if (!self || !self.username) {
+      throw new Error("Unauthorized");
+    }
 
-    return self.following;
+    const user = await User.findOne({
+      exUserid: self.id,
+    })
+      .populate("following")
+      .populate({
+        path: "following",
+        populate: {
+          path: "stream",
+        },
+      });
+
+    const data = JSON.parse(JSON.stringify(user));
+
+    if (!data) {
+      throw new Error("Not Found");
+    }
+
+    return data.following;
   } catch (e) {
     console.log(e);
     return [];

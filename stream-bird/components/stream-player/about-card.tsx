@@ -25,8 +25,8 @@ export const AboutCard = ({
   const followedByLabel = followedByCount === 1 ? "follower" : "followers";
 
   return (
-    <div className="px-4">
-      <div className="group rounded-xl bg-background p-6 lg:p-10 flex flex-col gap-y-3">
+    <div>
+      <div className="group bg-background p-3 lg:p-5 flex flex-col gap-y-3 border-[1px]">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-x-2 font-semibold text-lg lg:text-2xl">
             About {hostName}
@@ -38,9 +38,7 @@ export const AboutCard = ({
           <span className="font-semibold text-primary">{followedByCount}</span>{" "}
           {followedByLabel}
         </div>
-        <p className="text-sm">
-          {bio || "This user prefers to keep an air of mystery about them."}
-        </p>
+        <p className="text-sm">{bio || "Nothing to show in bio"}</p>
       </div>
     </div>
   );
